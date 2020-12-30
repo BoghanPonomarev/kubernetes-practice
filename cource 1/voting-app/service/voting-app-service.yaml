@@ -1,0 +1,17 @@
+# NodePort for voting app pod
+apiVersion: v1
+kind: Service
+metadata:
+  name: voting-service # name is very important because it is direct link in our pods code http://voting-service/
+  labels:
+    name: voting-service
+    app: demo-voting-app
+spec:
+  type: NodePort
+  ports:
+    - port: 80
+      targetPort: 80
+      nodePort: 30004
+  selector: # labels from pod
+    name: voting-app-pod
+    app: demo-voting-app

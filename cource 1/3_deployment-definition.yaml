@@ -1,0 +1,26 @@
+apiVersion: apps/v1 # check version strictly, should be same
+kind: Deployment
+metadata:
+  name: nginx-deployment # deployment and container names
+  labels:
+    app: nginx
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx # should be exact same as metadata/labels and selector/matchLabels
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:1.14.2
+          ports:
+            - containerPort: 80 # bind container`s ports
+
+# change image version from 1.14.2 to nginx:1.14.3 and use 'kubectl apply -f 3_deployment-definition.yaml'
+# understand that there is no nginx:1.14.3
+# use 'kubectl rollout undo deployment.apps/nginx-deployment' to revert deployment
+# change image version from 1.14.2 to nginx:1.15 and use 'kubectl apply -f 3_deployment-definition.yaml'

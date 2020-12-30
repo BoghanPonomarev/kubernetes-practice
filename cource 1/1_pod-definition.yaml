@@ -1,0 +1,11 @@
+apiVersion: v1 # version of file
+kind: Pod # element type
+metadata: 
+    name: my-pod-nginx # name of the pod
+    labels: # labels by which we can identify pods
+        my-label-app: app
+        app-kind: frontend
+spec:
+    containers:
+    - name: nginx # container name
+      image: nginx # container image

@@ -1,0 +1,16 @@
+# ClusterIp for postgres pod
+apiVersion: v1
+kind: Service
+metadata:
+  name: db # name is very important because it is direct link in our pods code http://db/
+  labels:
+    name: postgres-service
+    app: demo-voting-app
+spec:
+  # hidden default value "type: ClusterIp"
+  ports:
+    - port: 5432
+      targetPort: 5432
+  selector: # labels from db pod
+    name: postgres-pod
+    app: demo-voting-app

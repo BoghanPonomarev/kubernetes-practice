@@ -1,0 +1,22 @@
+apiVersion: apps/v1  # be careful, for replicaset we need exactly qpps/v1
+kind: ReplicaSet # type of the element
+metadata:
+  name: frontend
+  labels:
+    app: guestbook
+    tier: frontend
+spec:
+  replicas: 3 # how much replicas do we need
+  selector:
+    matchLabels: # selector/matchLabels needs to determinate pods which be deployed
+      tier: frontend
+  template: # start of pod description
+    metadata:
+      labels:
+        tier: frontend # should be copy of selector/matchLabels
+    spec:
+      containers:
+        - name: php-redis # container name
+          image: gcr.io/google_samples/gb-frontend:v3
+
+# Set replicas to any number and use 'kubectl apply -f 2_replicaset-definition.yaml'

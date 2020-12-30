@@ -1,0 +1,19 @@
+# Postgres pod for permanent votes saving
+apiVersion: v1
+kind: Pod
+metadata:
+  name: postgres-pod
+  labels:
+    name: postgres-pod
+    app: demo-voting-app
+spec:
+  containers:
+    - name: postgres
+      image: postgres # postgres image
+      ports:
+        - containerPort: 5432 # port that is used by postgres
+      env:
+        - name: POSTGRES_USER
+          value: "postgres"
+        - name: POSTGRES_PASSWORD
+          value: "postgres"

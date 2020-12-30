@@ -1,0 +1,16 @@
+# ClusterIp for redis pod
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis # name is very important because it is direct link in our pods code http://redis/
+  labels:
+    name: redis-service
+    app: demo-voting-app
+spec:
+  # hidden default value "type: ClusterIp"
+  ports:
+    - port: 6379
+      targetPort: 6379
+  selector: # labels from pod
+    name: redis-pod
+    app: demo-voting-app
